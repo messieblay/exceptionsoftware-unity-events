@@ -1,2 +1,2 @@
-# exceptionsoftware-unity-events
-Event System
+# exception-unity-libraries
+Librerias para el manejo de Unity

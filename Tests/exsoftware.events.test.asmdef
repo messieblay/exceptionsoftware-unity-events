@@ -1,0 +1,16 @@
+{
+    "name": "exsoftware.events.tests",
+    "rootNamespace": "ExceptionSoftware.Events.Tests",
+    "references": [
+        "GUID:df22ca9295a18fd4aa6ccbc6e59b04f9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

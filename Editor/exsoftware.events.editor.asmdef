@@ -1,0 +1,18 @@
+{
+    "name": "exsoftware.events.editor",
+    "rootNamespace": "ExceptionSoftware.Events",
+    "references": [
+        "GUID:e98f51a5f9e9ac748931c6408eeea8f6",
+        "GUID:df22ca9295a18fd4aa6ccbc6e59b04f9",
+        "GUID:f7cdc24894930204eb832167f7b63e9e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
