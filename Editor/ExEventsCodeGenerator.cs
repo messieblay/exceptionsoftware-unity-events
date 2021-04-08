@@ -11,6 +11,7 @@ namespace ExSoftware.Events
         public struct Options
         {
             public string className { get; set; }
+            public string classNameGetCode { get; set; }
             public string namespaceName { get; set; }
             public string sourceAssetPath { get; set; }
         }
@@ -19,12 +20,14 @@ namespace ExSoftware.Events
         {
             Options options = default;
             options.className = CSharpCodeHelpers.MakeTypeName(layer.name) + "EventLayer";
+            options.classNameGetCode = layer.LastType != string.Empty ? layer.LastType : options.className;
+
             options.namespaceName = gamenamespace;
 
 
             //Recuperación de la clase anterior. De ahi obtendré el código viejo
             List<NestedClass> nestedClasses = null;
-            List<System.Type> types = ExReflect.FindTypes(options.className);
+            List<System.Type> types = ExReflect.FindTypes(options.classNameGetCode);
 
             foreach (Type t in types)
             {
@@ -45,6 +48,13 @@ namespace ExSoftware.Events
             //Reemplazar fichero
             string finalPath = ExEventsEditor.EVENTS_SCRIPTS_PATH + "/" + options.className + ".cs";
             File.WriteAllText(finalPath, newfile);
+
+            //Guardamos las referencias de los ultimos scripts creados para las sucesivas modificaciones
+            layer.LastType = options.className;
+            foreach (var e in layer.eventsnew)
+            {
+                e.LastName = e.name;
+            }
         }
 
         public static string GenerateWrapperCode(Layer layer, List<NestedClass> oldNestedClasses, Options options)
@@ -82,29 +92,38 @@ namespace ExSoftware.Events
                     writer.BeginBlock();
 
                     //Events
-                    foreach (var v in layer.events)
+                    foreach (var v in layer.eventsnew)
                     {
                         writer.WriteLine($"//Events");
-                        writer.WriteLine($"public Event<{CSharpCodeHelpers.MakeTypeName(v)}> {v.ToLower()};");
+                        writer.WriteLine($"public Event<{CSharpCodeHelpers.MakeTypeName(v.name)}> {v.name.ToLower()};");
                     }
 
                     writer.WriteLine("");
 
                     //Evetn Models
                     string oldcode;
-                    foreach (var v in layer.events)
+                    foreach (var v in layer.eventsnew)
                     {
                         oldcode = string.Empty;
                         if (oldNestedClasses != null)
                         {
-                            NestedClass nested = oldNestedClasses.Find(s => s.name.ToLower() == v.ToLower());
+                            NestedClass nested;
+                            if (v.LastName != string.Empty)
+                            {
+                                nested = oldNestedClasses.Find(s => s.name.ToLower() == v.LastName.ToLower());
+                            }
+                            else
+                            {
+                                nested = oldNestedClasses.Find(s => s.name.ToLower() == v.name.ToLower());
+                            }
+
                             if (nested != null)
                             {
                                 oldcode = nested.code;
                             }
                         }
 
-                        writer.WriteLine($"public class {CSharpCodeHelpers.MakeTypeName(v)} : EventModel");
+                        writer.WriteLine($"public class {CSharpCodeHelpers.MakeTypeName(v.name)} : EventModel");
                         writer.BeginBlock();
 
                         writer.WriteLine(oldcode);

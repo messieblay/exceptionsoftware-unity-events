@@ -24,6 +24,9 @@ namespace ExSoftware.Events
                 {
                     ExEventsCodeGenerator.GenerateLayer(l, Target.gamenamespace);
                 }
+
+                EditorUtility.SetDirty(Target);
+
                 AssetDatabase.Refresh();
                 Debug.Log("Layers updated");
             }
@@ -49,6 +52,21 @@ namespace ExSoftware.Events
                 Target.layers = ExAssets.FindAssetsByType<EventLayer>();
                 Unityx.SetDirty(Target);
             }
+
+            ExGUI.Separator();
+            if (GUILayout.Button("Migrate old events to new"))
+            {
+                foreach (var l in Target.layersdefinition)
+                {
+                    l.eventsnew.Clear();
+                    foreach (var e in l.events)
+                    {
+                        l.eventsnew.Add(new Layer.Event() { name = e });
+                    }
+                }
+                Unityx.SetDirty(Target);
+            }
+
         }
     }
 }
