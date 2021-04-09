@@ -27,7 +27,7 @@ namespace ExSoftware.Events
                 layer.name = layer.name.ToSentence();
                 for (int i = 0; i < layer.events.Count; i++)
                 {
-                    layer.events[i] = layer.events[i].ToSentence();
+                    layer.events[i].name = layer.events[i].name.ToSentence();
                 }
             }
         }

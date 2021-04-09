@@ -41,7 +41,7 @@ namespace ExSoftware.Events
                         continue;
                     }
 
-                    ExAssets.CreateAsset(ExEventsEditor.EVENTS_PATH, layers.Name, layers, false);
+                    ExAssets.CreateAsset(ExEventsEditor.EVENTS_ASSETS_PATH, layers.Name, layers, false);
                 }
 
                 AssetDatabase.Refresh();
@@ -50,20 +50,6 @@ namespace ExSoftware.Events
             if (GUILayout.Button("Assign"))
             {
                 Target.layers = ExAssets.FindAssetsByType<EventLayer>();
-                Unityx.SetDirty(Target);
-            }
-
-            ExGUI.Separator();
-            if (GUILayout.Button("Migrate old events to new"))
-            {
-                foreach (var l in Target.layersdefinition)
-                {
-                    l.eventsnew.Clear();
-                    foreach (var e in l.events)
-                    {
-                        l.eventsnew.Add(new Layer.Event() { name = e });
-                    }
-                }
                 Unityx.SetDirty(Target);
             }
 

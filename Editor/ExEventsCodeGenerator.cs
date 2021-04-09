@@ -51,7 +51,7 @@ namespace ExSoftware.Events
 
             //Guardamos las referencias de los ultimos scripts creados para las sucesivas modificaciones
             layer.LastType = options.className;
-            foreach (var e in layer.eventsnew)
+            foreach (var e in layer.events)
             {
                 e.LastName = e.name;
             }
@@ -92,7 +92,7 @@ namespace ExSoftware.Events
                     writer.BeginBlock();
 
                     //Events
-                    foreach (var v in layer.eventsnew)
+                    foreach (var v in layer.events)
                     {
                         writer.WriteLine($"//Events");
                         writer.WriteLine($"public Event<{CSharpCodeHelpers.MakeTypeName(v.name)}> {v.name.ToLower()};");
@@ -102,7 +102,7 @@ namespace ExSoftware.Events
 
                     //Evetn Models
                     string oldcode;
-                    foreach (var v in layer.eventsnew)
+                    foreach (var v in layer.events)
                     {
                         oldcode = string.Empty;
                         if (oldNestedClasses != null)

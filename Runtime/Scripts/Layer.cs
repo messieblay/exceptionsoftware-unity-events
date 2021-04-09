@@ -17,12 +17,9 @@ namespace ExSoftware.Events
             set => _lastType = value;
         }
 
-        [UnityEngine.SerializeField]
-        public List<string> events = new List<string>();
-
 
         [UnityEngine.SerializeField]
-        public List<Event> eventsnew = new List<Event>();
+        public List<Event> events = new List<Event>();
 
         [System.Serializable]
         public class Event
