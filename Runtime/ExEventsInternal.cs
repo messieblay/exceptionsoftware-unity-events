@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     internal class ExEventsInternal
     {

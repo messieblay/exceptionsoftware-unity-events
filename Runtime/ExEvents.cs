@@ -1,4 +1,4 @@
-﻿namespace ExSoftware.Events
+﻿namespace ExceptionSoftware.Events
 {
 
     public static class ExEvents

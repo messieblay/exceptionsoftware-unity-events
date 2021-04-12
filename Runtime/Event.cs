@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     [System.Serializable]
     public class Event<T> where T : EventModel

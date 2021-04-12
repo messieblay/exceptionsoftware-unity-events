@@ -1,8 +1,8 @@
-﻿using ExSoftware.ExEditor;
+﻿using ExceptionSoftware.ExEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     [CustomEditor(typeof(ExEventAsset))]
     public class ExEventAssetEditor : ExEditor<ExEventAsset>

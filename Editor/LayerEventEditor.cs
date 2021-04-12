@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ExceptionSoftware.Events
 {
-    [CustomPropertyDrawer(typeof(ExSoftware.Events.Layer.Event))]
+    [CustomPropertyDrawer(typeof(ExceptionSoftware.Events.Layer.Event))]
     public class LayerEventEditor : PropertyDrawer
     {
 

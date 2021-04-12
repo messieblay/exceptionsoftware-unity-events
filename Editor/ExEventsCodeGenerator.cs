@@ -1,10 +1,10 @@
-﻿using ExSoftware.ExEditor;
+﻿using ExceptionSoftware.ExEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     public static class ExEventsCodeGenerator
     {

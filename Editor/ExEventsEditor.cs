@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     [InitializeOnLoad]
     public class ExEventsEditor
@@ -16,6 +16,7 @@ namespace ExSoftware.Events
             {
                 _assets = ExAssets.FindAssetsByType<ExEventAsset>().First();
             }
+
             if (_assets == null)
             {
                 System.IO.Directory.CreateDirectory(EVENTS_PATH);
@@ -24,7 +25,6 @@ namespace ExSoftware.Events
                 _assets = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH, "EventsLayers");
             }
         }
-
 
         [MenuItem("Tools/Ex Software/Events/Asset")]
         static void SelectAsset()

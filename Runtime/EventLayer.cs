@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     public class EventLayer : ScriptableObject
     {

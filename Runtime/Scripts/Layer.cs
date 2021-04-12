@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ExSoftware.Events
+namespace ExceptionSoftware.Events
 {
     [System.Serializable]
     public class Layer
