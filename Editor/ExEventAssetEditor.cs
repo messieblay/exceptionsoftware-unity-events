@@ -17,7 +17,12 @@ namespace ExceptionSoftware.Events
             {
 
             }
-
+            //if (GUILayout.Button("Update folders"))
+            //{
+            //    System.IO.Directory.CreateDirectory(Target.folder + ExEventsEditorUtility.EVENTS_PATH);
+            //    System.IO.Directory.CreateDirectory(Target.folder + ExEventsEditorUtility.EVENTS_ASSETS_PATH);
+            //    System.IO.Directory.CreateDirectory(Target.folder + ExEventsEditorUtility.EVENTS_SCRIPTS_PATH);
+            //}
             if (GUILayout.Button("Update Scripts"))
             {
                 foreach (Layer l in Target.layersdefinition)
@@ -41,7 +46,7 @@ namespace ExceptionSoftware.Events
                         continue;
                     }
 
-                    ExAssets.CreateAsset(ExEventsEditor.EVENTS_ASSETS_PATH, layers.Name, layers, false);
+                    ExAssets.CreateAsset(ExEventsEditorUtility.EVENTS_ASSETS_PATH, layers.Name, layers, false);
                 }
 
                 AssetDatabase.Refresh();

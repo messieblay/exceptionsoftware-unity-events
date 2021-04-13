@@ -43,10 +43,10 @@ namespace ExceptionSoftware.Events
             string newfile = GenerateWrapperCode(layer, nestedClasses, options);
 
             //Creacion de directorio
-            Directory.CreateDirectory(ExEventsEditor.EVENTS_SCRIPTS_PATH);
+            Directory.CreateDirectory(ExEventsEditorUtility.EVENTS_SCRIPTS_PATH);
 
             //Reemplazar fichero
-            string finalPath = ExEventsEditor.EVENTS_SCRIPTS_PATH + "/" + options.className + ".cs";
+            string finalPath = ExEventsEditorUtility.EVENTS_SCRIPTS_PATH + "/" + options.className + ".cs";
             File.WriteAllText(finalPath, newfile);
 
             //Guardamos las referencias de los ultimos scripts creados para las sucesivas modificaciones
