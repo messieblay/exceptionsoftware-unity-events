@@ -73,7 +73,7 @@ namespace ExceptionSoftware.Events
 
 
             // Usings.
-            writer.WriteLine("using ExSoftware.Events;");
+            writer.WriteLine("using ExceptionSoftware.Events;");
             writer.WriteLine("using UnityEngine;");
             writer.WriteLine("");
 
