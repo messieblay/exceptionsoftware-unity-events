@@ -15,15 +15,10 @@ namespace ExceptionSoftware.Events
             }
             if (EditorGUI.EndChangeCheck())
             {
-
+                Unityx.SetDirty(Target);
             }
-            //if (GUILayout.Button("Update folders"))
-            //{
-            //    System.IO.Directory.CreateDirectory(Target.folder + ExEventsEditorUtility.EVENTS_PATH);
-            //    System.IO.Directory.CreateDirectory(Target.folder + ExEventsEditorUtility.EVENTS_ASSETS_PATH);
-            //    System.IO.Directory.CreateDirectory(Target.folder + ExEventsEditorUtility.EVENTS_SCRIPTS_PATH);
-            //}
-            if (GUILayout.Button("Update Scripts"))
+
+            if (GUILayout.Button("0 - Update Scripts"))
             {
                 foreach (Layer l in Target.layersdefinition)
                 {
@@ -31,12 +26,13 @@ namespace ExceptionSoftware.Events
                 }
 
                 EditorUtility.SetDirty(Target);
+                AssetDatabase.SaveAssets();
 
                 AssetDatabase.Refresh();
                 Debug.Log("Layers updated");
             }
 
-            if (GUILayout.Button("Generate Assets"))
+            if (GUILayout.Button("1 - Generate Assets"))
             {
                 //System.IO.Directory.CreateDirectory(EVENTS_SCRIPTS_PATH);
                 foreach (var layers in ExReflect.GetDerivedClassesAllAsseblys<EventLayer>())
@@ -52,12 +48,21 @@ namespace ExceptionSoftware.Events
                 AssetDatabase.Refresh();
             }
 
-            if (GUILayout.Button("Assign"))
+            if (GUILayout.Button("2 - Assign"))
             {
                 Target.layers = ExAssets.FindAssetsByType<EventLayer>();
                 Unityx.SetDirty(Target);
+                AssetDatabase.SaveAssets();
             }
+            ExGUI.Separator();
 
+            GUI.color = Color.green;
+            if (GUILayout.Button("3 - Save asset"))
+            {
+                EditorUtility.SetDirty(Target);
+                AssetDatabase.SaveAssets();
+            }
+            GUI.color = Color.white;
         }
     }
 }

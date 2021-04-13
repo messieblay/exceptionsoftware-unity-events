@@ -29,15 +29,9 @@ namespace ExceptionSoftware.Events
                 System.IO.Directory.CreateDirectory(EVENTS_PATH_BASE + EVENTS_PATH);
                 System.IO.Directory.CreateDirectory(EVENTS_PATH_BASE + EVENTS_SCRIPTS_PATH);
                 System.IO.Directory.CreateDirectory(EVENTS_PATH_BASE + EVENTS_ASSETS_PATH);
-                _assets = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH_BASE + EVENTS_PATH, "EventsLayers");
+                _assets = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH_BASE + EVENTS_PATH, "EventsSettings");
             }
         }
-
-        //[MenuItem("Game/Events/Create Asset")]
-        //static void CreateAsset()
-        //{
-        //    SelectAsset();
-        //}
 
         [MenuItem("Game/Events/Select Asset")]
         static void SelectAsset()
