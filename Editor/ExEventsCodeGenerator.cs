@@ -19,7 +19,7 @@ namespace ExceptionSoftware.Events
         public static void GenerateLayer(Layer layer, string gamenamespace)
         {
             Options options = default;
-            options.className = CSharpCodeHelpers.MakeTypeName(layer.name) + "EventLayer";
+            options.className = CSharpCodeHelpers.MakeTypeName(layer.name) + "Events";
             options.classNameGetCode = layer.LastType != string.Empty ? layer.LastType : options.className;
 
             options.namespaceName = gamenamespace;
@@ -92,10 +92,10 @@ namespace ExceptionSoftware.Events
                     writer.BeginBlock();
 
                     //Events
+                    writer.WriteLine($"//Events");
                     foreach (var v in layer.events)
                     {
-                        writer.WriteLine($"//Events");
-                        writer.WriteLine($"public Event<{CSharpCodeHelpers.MakeTypeName(v.name)}> {v.name.ToLower()};");
+                        writer.WriteLine($"public Event<{CSharpCodeHelpers.MakeTypeName(v.name)}> {CSharpCodeHelpers.MakeIdentifier(v.name, firstCharacterLow: true)};");
                     }
 
                     writer.WriteLine("");
@@ -123,7 +123,7 @@ namespace ExceptionSoftware.Events
                             }
                         }
 
-                        writer.WriteLine($"public class {CSharpCodeHelpers.MakeTypeName(v.name)} : EventModel");
+                        writer.WriteLine($"public class {CSharpCodeHelpers.MakeTypeName(v.name)} : EventModel<{CSharpCodeHelpers.MakeTypeName(v.name)}>");
                         writer.BeginBlock();
 
                         writer.WriteLine(oldcode);

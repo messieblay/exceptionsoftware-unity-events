@@ -8,30 +8,34 @@ namespace ExceptionSoftware.Events
     public class Event<T> where T : EventModel
     {
         [SerializeField] List<EventInternal> _listeners = new List<EventInternal>();
-
+        [SerializeField] bool logCatch = false;
+        [SerializeField] bool logRemoveCatch = false;
+        [SerializeField] bool logThrow = false;
         public void Catch(Action<T> evt)
         {
             EventInternal test = new EventInternal(evt);
             if (!_listeners.Contains(test))
             {
                 _listeners.Add(test);
+                if (logThrow) Debug.Log($"{GetType()} Catch {evt.GetType()}");
             }
         }
         public void RemoveCatch(Action<T> evt)
         {
             EventInternal test = new EventInternal(evt);
             _listeners.Remove(test);
+            if (logThrow) Debug.Log($"{GetType()} RemoveCatch {evt.GetType()}");
         }
 
         public void Throw(T evt)
         {
-            Debug.Log($"{GetType()} Throws {evt.GetType()}");
             for (int i = _listeners.Count - 1; -1 < i; i--)
             {
                 if (!_listeners[i].Invoke(evt))
                 {
                     _listeners.RemoveAt(i);
                 }
+                if (logThrow) Debug.Log($"{GetType()} Throws {evt.GetType()}");
             }
         }
 

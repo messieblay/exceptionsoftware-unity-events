@@ -1,7 +1,7 @@
 {
   "name": "com.exceptionsoftware.exevents",
   "displayName": "Ex Events",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Librerias de codigo utilies para unity",
   "type": "library"
 }

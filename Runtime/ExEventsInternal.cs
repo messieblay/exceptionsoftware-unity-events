@@ -46,6 +46,17 @@ namespace ExceptionSoftware.Events
             }
             return thrower;
         }
+
+        public static void CleanEvents(EventLayer layer)
+        {
+            foreach (var obj in layer.GetType().GetFields().Where(s => s.FieldType.IsGenericType))
+            {
+                Type t = obj.FieldType;
+                MethodInfo method = t.GetMethod("Clear");
+                method.Invoke(obj.GetValue(layer), null);
+            }
+        }
+
         static Dictionary<Type, ReflectThrow> _cachedThrows = new Dictionary<Type, ReflectThrow>();
         struct ReflectThrow
         {
