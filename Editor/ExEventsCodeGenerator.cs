@@ -26,21 +26,21 @@ namespace ExceptionSoftware.Events
 
 
             //Recuperación de la clase anterior. De ahi obtendré el código viejo
-            List<NestedClass> nestedClasses = null;
+            ClassReaded classReaded = null;
             List<System.Type> types = ExReflect.FindTypes(options.classNameGetCode);
 
             foreach (Type t in types)
             {
                 if (t.IsSubclassOf(typeof(EventLayer)))
                 {
-                    nestedClasses = CSharpCodeHelpers.GetNestedClassCode(t);
+                    classReaded = CSharpCodeHelpers.GetNestedClassCode(t);
                     break;
                 }
             }
 
 
             //Edicion del template
-            string newfile = GenerateWrapperCode(layer, nestedClasses, options);
+            string newfile = GenerateWrapperCode(layer, classReaded, options);
 
             //Creacion de directorio
             Directory.CreateDirectory(ExEventsEditorUtility.EVENTS_SCRIPTS_PATH);
@@ -57,7 +57,7 @@ namespace ExceptionSoftware.Events
             }
         }
 
-        public static string GenerateWrapperCode(Layer layer, List<NestedClass> oldNestedClasses, Options options)
+        public static string GenerateWrapperCode(Layer layer, ClassReaded classReaded, Options options)
         {
             if (layer == null)
                 throw new ArgumentNullException(nameof(layer));
@@ -73,8 +73,14 @@ namespace ExceptionSoftware.Events
 
 
             // Usings.
-            writer.WriteLine("using ExceptionSoftware.Events;");
-            writer.WriteLine("using UnityEngine;");
+            foreach (var namespaces in classReaded.namespaces)
+            {
+                writer.WriteLine(namespaces);
+            }
+
+            if (!classReaded.namespaces.Contains("using ExceptionSoftware.Events;")) writer.WriteLine("using ExceptionSoftware.Events;");
+            //if (!classReaded.namespaces.Contains("using UnityEngine;")) writer.WriteLine("using UnityEngine;");
+
             writer.WriteLine("");
 
             // Begin namespace.
@@ -104,16 +110,16 @@ namespace ExceptionSoftware.Events
                     foreach (var v in layer.events)
                     {
                         oldcode = string.Empty;
-                        if (oldNestedClasses != null)
+                        if (classReaded.NestedClasses != null)
                         {
                             NestedClass nested;
                             if (v.LastName != string.Empty)
                             {
-                                nested = oldNestedClasses.Find(s => s.name.ToLower() == v.LastName.ToLower());
+                                nested = classReaded.NestedClasses.Find(s => s.name.ToLower() == v.LastName.ToLower());
                             }
                             else
                             {
-                                nested = oldNestedClasses.Find(s => s.name.ToLower() == v.name.ToLower());
+                                nested = classReaded.NestedClasses.Find(s => s.name.ToLower() == v.name.ToLower());
                             }
 
                             if (nested != null)
