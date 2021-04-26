@@ -92,7 +92,6 @@ namespace ExceptionSoftware.Events
                     writer.BeginBlock();
 
                     //Events
-                    writer.WriteLine($"//Events");
                     foreach (var v in layer.events)
                     {
                         writer.WriteLine($"public Event<{CSharpCodeHelpers.MakeTypeName(v.name)}> {CSharpCodeHelpers.MakeIdentifier(v.name, firstCharacterLow: true)};");

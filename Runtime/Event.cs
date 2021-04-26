@@ -11,15 +11,17 @@ namespace ExceptionSoftware.Events
         [SerializeField] bool logCatch = false;
         [SerializeField] bool logRemoveCatch = false;
         [SerializeField] bool logThrow = false;
-        public void Catch(Action<T> evt)
+        public void Catch(Action<T> evt, bool once = false)
         {
-            EventInternal test = new EventInternal(evt);
+            EventInternal test = new EventInternal(evt, once: true);
             if (!_listeners.Contains(test))
             {
                 _listeners.Add(test);
                 if (logThrow) Debug.Log($"{GetType()} Catch {evt.GetType()}");
             }
         }
+        public void CatchOnce(Action<T> evt) => Catch(evt, true);
+
         public void RemoveCatch(Action<T> evt)
         {
             EventInternal test = new EventInternal(evt);
@@ -31,10 +33,18 @@ namespace ExceptionSoftware.Events
         {
             for (int i = _listeners.Count - 1; -1 < i; i--)
             {
-                if (!_listeners[i].Invoke(evt))
+                if (_listeners[i].Invoke(evt))
+                {
+                    if (_listeners[i].once)
+                    {
+                        _listeners.RemoveAt(i);
+                    }
+                }
+                else
                 {
                     _listeners.RemoveAt(i);
                 }
+
                 if (logThrow) Debug.Log($"{GetType()} Throws {evt.GetType()}");
             }
         }
@@ -51,7 +61,8 @@ namespace ExceptionSoftware.Events
             public string type;
             public string method;
 
-            public EventInternal(System.Action<T> action)
+            public bool once = false;
+            public EventInternal(System.Action<T> action, bool once = false)
             {
                 this.action = action;
                 foreach (var e in action.GetInvocationList())
@@ -71,6 +82,8 @@ namespace ExceptionSoftware.Events
                     }
 
                 }
+
+                this.once = once;
             }
 
             public bool Invoke(T data)
