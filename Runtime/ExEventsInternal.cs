@@ -13,6 +13,13 @@ namespace ExceptionSoftware.Events
             ReflectThrow thrower = GetReflect(t);
             thrower.catcher.Invoke(thrower.oevt, new object[] { evt });
         }
+        public static void CatchOnce<T>(System.Action<T> evt) where T : EventModel
+        {
+            Type t = evt.GetType().GetGenericArguments().FirstOrDefault();
+            ReflectThrow thrower = GetReflect(t);
+            thrower.catcherOnce.Invoke(thrower.oevt, new object[] { evt });
+        }
+
         public static void RemoveCatch<T>(System.Action<T> evt) where T : EventModel
         {
             Type t = evt.GetType().GetGenericArguments().FirstOrDefault();
@@ -42,7 +49,7 @@ namespace ExceptionSoftware.Events
 
                 object oevt = layer.GetType().GetFields().Where(s => s.FieldType.IsGenericType && s.FieldType.GetGenericArguments().Contains(t)).FirstOrDefault().GetValue(layer);
 
-                _cachedThrows.Add(t, thrower = new ReflectThrow(oevt, oevt.GetType().GetMethod("Throw"), oevt.GetType().GetMethod("Catch"), oevt.GetType().GetMethod("RemoveCatch"), oevt.GetType().GetMethod("Clear")));
+                _cachedThrows.Add(t, thrower = new ReflectThrow(oevt, oevt.GetType().GetMethod("Throw"), oevt.GetType().GetMethod("Catch"), oevt.GetType().GetMethod("CatchOnce"), oevt.GetType().GetMethod("RemoveCatch"), oevt.GetType().GetMethod("Clear")));
             }
             return thrower;
         }
@@ -63,14 +70,16 @@ namespace ExceptionSoftware.Events
             public object oevt;
             public MethodInfo thrower;
             public MethodInfo catcher;
+            public MethodInfo catcherOnce;
             public MethodInfo remover;
             public MethodInfo clear;
 
-            public ReflectThrow(object oevt, MethodInfo thrower, MethodInfo catcher, MethodInfo remover, MethodInfo clear)
+            public ReflectThrow(object oevt, MethodInfo thrower, MethodInfo catcher, MethodInfo catcherOnce, MethodInfo remover, MethodInfo clear)
             {
                 this.oevt = oevt;
                 this.thrower = thrower;
                 this.catcher = catcher;
+                this.catcherOnce = catcherOnce;
                 this.remover = remover;
                 this.clear = clear;
             }

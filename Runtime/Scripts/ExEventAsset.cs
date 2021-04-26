@@ -24,24 +24,10 @@ namespace ExceptionSoftware.Events
 
         private void OnValidate()
         {
-            //ValidatePath();
             ValidateNamespace();
             ValidateLayers();
         }
 
-        //void ValidatePath()
-        //{
-        //    folder = folder.Trim().Replace("\\", "/");
-        //    if (!folder.EndsWith("/"))
-        //    {
-        //        folder += "/";
-        //    }
-
-        //    if (folder == string.Empty)
-        //    {
-        //        folder = folder_default;
-        //    }
-        //}
 
         void ValidateNamespace()
         {
