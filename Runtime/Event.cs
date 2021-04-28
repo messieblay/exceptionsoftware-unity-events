@@ -11,16 +11,18 @@ namespace ExceptionSoftware.Events
         [SerializeField] bool logCatch = false;
         [SerializeField] bool logRemoveCatch = false;
         [SerializeField] bool logThrow = false;
-        public void Catch(Action<T> evt, bool once = false)
+
+        void CatchInternal(Action<T> evt, bool once)
         {
-            EventInternal test = new EventInternal(evt, once: true);
+            EventInternal test = new EventInternal(evt, once);
             if (!_listeners.Contains(test))
             {
                 _listeners.Add(test);
                 if (logThrow) Debug.Log($"{GetType()} Catch {evt.GetType()}");
             }
         }
-        public void CatchOnce(Action<T> evt) => Catch(evt, true);
+        public void Catch(Action<T> evt) => CatchInternal(evt, false);
+        public void CatchOnce(Action<T> evt) => CatchInternal(evt, true);
 
         public void RemoveCatch(Action<T> evt)
         {
