@@ -18,7 +18,7 @@ namespace ExceptionSoftware.Events
             if (!_listeners.Contains(test))
             {
                 _listeners.Add(test);
-                if (logThrow) Debug.Log($"{GetType()} Catch {evt.GetType()}");
+                if (logCatch) Debug.Log($"{GetType()} Catch {evt.GetType()}");
             }
         }
         public void Catch(Action<T> evt) => CatchInternal(evt, false);
@@ -28,7 +28,7 @@ namespace ExceptionSoftware.Events
         {
             EventInternal test = new EventInternal(evt);
             _listeners.Remove(test);
-            if (logThrow) Debug.Log($"{GetType()} RemoveCatch {evt.GetType()}");
+            if (logRemoveCatch) Debug.Log($"{GetType()} RemoveCatch {evt.GetType()}");
         }
 
         public void Throw(T evt)

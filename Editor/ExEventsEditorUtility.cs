@@ -10,6 +10,7 @@ namespace ExceptionSoftware.Events
         //public const string destination_path_default = "Assets/0Game/Events/";
         //public const string gamenamespace_default = "Game.Events";
 
+        public const string EVENTS_SETTINGS_PATH = "Assets/Settings/";
         public const string EVENTS_PATH = "Assets/0Game/Events/";
         public const string EVENTS_ASSETS_PATH = EVENTS_PATH + "Layers";
         public const string EVENTS_SCRIPTS_PATH = EVENTS_PATH + "Scripts";
@@ -18,6 +19,9 @@ namespace ExceptionSoftware.Events
 
         static void LoadAsset()
         {
+            if (!System.IO.Directory.Exists(EVENTS_SETTINGS_PATH))
+                System.IO.Directory.CreateDirectory(EVENTS_SETTINGS_PATH);
+
             if (!System.IO.Directory.Exists(EVENTS_PATH))
                 System.IO.Directory.CreateDirectory(EVENTS_PATH);
 
@@ -36,7 +40,7 @@ namespace ExceptionSoftware.Events
             if (_assets == null)
             {
 
-                _assets = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH, "EventsSettings");
+                _assets = ExAssets.CreateAsset<ExEventAsset>(EVENTS_SETTINGS_PATH, "ExEventsSettings");
             }
         }
 
