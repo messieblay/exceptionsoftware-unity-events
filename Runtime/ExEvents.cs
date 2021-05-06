@@ -1,4 +1,7 @@
-﻿namespace ExceptionSoftware.Events
+﻿using System.Linq;
+using UnityEngine;
+
+namespace ExceptionSoftware.Events
 {
 
     public static class ExEvents
@@ -12,9 +15,17 @@
                 {
                     _assets = ExAssets.FindAssetsByType<ExEventAsset>().First();
                 }
+
+                if (_assets == null)
+                {
+                    _assets = Resources.FindObjectsOfTypeAll<ExEventAsset>().FirstOrDefault();
+                }
+
                 return _assets;
             }
         }
+
+
 
         public static T GetLayer<T>() where T : EventLayer
         {
