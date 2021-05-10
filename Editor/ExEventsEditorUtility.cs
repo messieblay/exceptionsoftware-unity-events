@@ -41,7 +41,7 @@ namespace ExceptionSoftware.Events
             }
         }
 
-        [MenuItem("Game/Events/Select Asset")]
+        [MenuItem("Tools/Events/Select Asset", priority = 3000)]
         static void SelectAsset()
         {
             LoadAsset();

@@ -2,7 +2,8 @@
     "name": "exsoftware.events",
     "rootNamespace": "ExceptionSoftware.Events",
     "references": [
-        "GUID:e98f51a5f9e9ac748931c6408eeea8f6"
+        "GUID:e98f51a5f9e9ac748931c6408eeea8f6",
+        "GUID:87bb9fb851842a048b5a507bb6308e0d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
