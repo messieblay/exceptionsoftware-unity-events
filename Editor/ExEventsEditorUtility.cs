@@ -41,7 +41,7 @@ namespace ExceptionSoftware.Events
             }
         }
 
-        [MenuItem("Tools/Events/Select Asset", priority = 3000)]
+        [MenuItem("Tools/Events/Select Asset", priority = ExConstants.MENU_ITEM_PRIORITY)]
         static void SelectAsset()
         {
             LoadAsset();
