@@ -1,2 +1,2 @@
-# exception-unity-libraries
-Librerias para el manejo de Unity
+# exceptionsofware-unity-events
+Sistema de eventos TypeSafe
