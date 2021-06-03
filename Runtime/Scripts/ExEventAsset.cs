@@ -11,7 +11,7 @@ namespace ExceptionSoftware.Events
 
 
         [Header("Editor Design")]
-        public const string folder_default = "Assets/0Game/";
+        public const string folder_default = "Assets/Settings/";
         public const string gamenamespace_default = "Game.Events";
 
         //[SerializeField, HideInInspector] public string folder_generated = string.Empty;
