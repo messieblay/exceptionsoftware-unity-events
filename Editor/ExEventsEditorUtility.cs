@@ -7,7 +7,7 @@ namespace ExceptionSoftware.Events
     {
         static ExEventAsset _assets = null;
 
-        public const string EVENTS_PATH = ExConstants.GAME_PATH + "Events/";
+        public const string EVENTS_PATH = ExConstants.SETTINGS_PATH + "Events/";
         public const string EVENTS_PATH_RESOURCES = EVENTS_PATH + "Resources/";
         public const string EVENTS_ASSETS_PATH = EVENTS_PATH + "Layers";
         public const string EVENTS_SCRIPTS_PATH = EVENTS_PATH + "Scripts";
