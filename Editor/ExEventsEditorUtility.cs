@@ -1,11 +1,13 @@
-﻿using UnityEditor;
+﻿using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 namespace ExceptionSoftware.Events
 {
     [InitializeOnLoad]
     public class ExEventsEditorUtility
     {
-        static ExEventAsset _assets = null;
+        static ExEventAsset _settings = null;
 
         public const string EVENTS_PATH = ExConstants.SETTINGS_PATH + "Events/";
         public const string EVENTS_PATH_RESOURCES = EVENTS_PATH + "Resources/";
@@ -30,14 +32,19 @@ namespace ExceptionSoftware.Events
                 System.IO.Directory.CreateDirectory(EVENTS_PATH_RESOURCES);
 
 
-            if (_assets == null)
+            if (_settings == null)
             {
-                _assets = ExAssets.FindAssetsByType<ExEventAsset>().First();
+                _settings = ExAssets.FindAssetsByType<ExEventAsset>().FirstOrDefault();
             }
 
-            if (_assets == null)
+            if (_settings == null)
             {
-                _assets = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH, EVENTS_SETTINGS_FILENAME);
+                _settings = Resources.FindObjectsOfTypeAll<ExEventAsset>().FirstOrDefault();
+            }
+
+            if (_settings == null)
+            {
+                _settings = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH, EVENTS_SETTINGS_FILENAME);
             }
         }
 
@@ -45,7 +52,7 @@ namespace ExceptionSoftware.Events
         static void SelectAsset()
         {
             LoadAsset();
-            Selection.activeObject = _assets;
+            Selection.activeObject = _settings;
         }
 
     }
