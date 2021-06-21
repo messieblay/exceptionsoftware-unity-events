@@ -82,6 +82,10 @@ namespace ExceptionSoftware.Events
 
                 if (!classReaded.namespaces.Contains("using ExceptionSoftware.Events;")) writer.WriteLine("using ExceptionSoftware.Events;");
             }
+            else
+            {
+                writer.WriteLine("using ExceptionSoftware.Events;");
+            }
 
             writer.WriteLine("");
 
@@ -112,7 +116,7 @@ namespace ExceptionSoftware.Events
                     foreach (var v in layer.events)
                     {
                         oldcode = string.Empty;
-                        if (classReaded.NestedClasses != null)
+                        if (classReaded != null && classReaded.NestedClasses != null)
                         {
                             NestedClass nested;
                             if (v.LastName != string.Empty)
