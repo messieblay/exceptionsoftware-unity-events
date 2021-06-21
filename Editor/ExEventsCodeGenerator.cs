@@ -79,10 +79,9 @@ namespace ExceptionSoftware.Events
                 {
                     writer.WriteLine(namespaces);
                 }
-            }
 
-            if (!classReaded.namespaces.Contains("using ExceptionSoftware.Events;")) writer.WriteLine("using ExceptionSoftware.Events;");
-            //if (!classReaded.namespaces.Contains("using UnityEngine;")) writer.WriteLine("using UnityEngine;");
+                if (!classReaded.namespaces.Contains("using ExceptionSoftware.Events;")) writer.WriteLine("using ExceptionSoftware.Events;");
+            }
 
             writer.WriteLine("");
 
