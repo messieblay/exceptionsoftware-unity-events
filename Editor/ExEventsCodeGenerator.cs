@@ -73,9 +73,12 @@ namespace ExceptionSoftware.Events
 
 
             // Usings.
-            foreach (var namespaces in classReaded.namespaces)
+            if (classReaded != null)
             {
-                writer.WriteLine(namespaces);
+                foreach (var namespaces in classReaded.namespaces)
+                {
+                    writer.WriteLine(namespaces);
+                }
             }
 
             if (!classReaded.namespaces.Contains("using ExceptionSoftware.Events;")) writer.WriteLine("using ExceptionSoftware.Events;");
