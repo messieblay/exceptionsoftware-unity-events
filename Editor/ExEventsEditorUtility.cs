@@ -44,7 +44,7 @@ namespace ExceptionSoftware.Events
 
             if (_settings == null)
             {
-                _settings = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH, EVENTS_SETTINGS_FILENAME);
+                _settings = ExAssets.CreateAsset<ExEventAsset>(EVENTS_PATH, EVENTS_SETTINGS_FILENAME, true, true);
             }
         }
 
