@@ -25,7 +25,16 @@ namespace ExceptionSoftware.Events
             }
         }
 
-
+        [RuntimeInitializeOnLoadMethod]
+        static void CleanLayerAtAwake()
+        {
+            Debug.Log("Clean previous events at awake game");
+            if (Assets == null) return;
+            foreach (var l in Assets.layers)
+            {
+                ExEventsInternal.CleanEvents(l);
+            }
+        }
 
         public static T GetLayer<T>() where T : EventLayer
         {
