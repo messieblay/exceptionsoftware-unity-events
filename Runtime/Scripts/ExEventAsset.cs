@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ExceptionSoftware.Events
 {
     [System.Serializable]
-    public class ExEventAsset : ScriptableObject
+    public class ExEventAsset : SettingsAsset
     {
         [Header("Runtime")]
         [SerializeField] public List<EventLayer> layers = new List<EventLayer>();
