@@ -39,10 +39,10 @@ namespace ExceptionSoftware.Events
         {
             foreach (var layer in layersdefinition)
             {
-                layer.name = layer.name.ToSentence();
+                layer.name = layer.name.ToNoSpacesSentence();
                 for (int i = 0; i < layer.events.Count; i++)
                 {
-                    layer.events[i].name = layer.events[i].name.ToSentence();
+                    layer.events[i].name = layer.events[i].name.ToNoSpacesSentence();
                 }
             }
         }
